@@ -6,6 +6,7 @@
  $pw = '';
  $db = 'Budgetrechner';
 
+ 
 define('APP_Host',$host);
 define('APP_User',$user);
 define('APP_Pasword',$pw);

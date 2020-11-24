@@ -4,13 +4,19 @@ require_once '../database/user.php';
 /**
  * Class class_login
  */
-class class_login {
-	private $name;
-	private $pasword;
+class system_login {
 	
-	private function login($name, $pasword) {
-		$user = new database_user();
-		return $user->LoginUser($name, $pasword);
+	/**
+	 * @var database_user
+	 */
+	private $user;
+	
+	public function __construct() {
+		$this->user = new database_user();
+	}
+	
+	public function login($name, $pasword) {
+		return $this->user->LoginUser($name, $pasword);
 	}
 	
 }

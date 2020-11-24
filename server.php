@@ -1,18 +1,17 @@
 <?php
-require_once './app/database/user.php';
+require_once './app/system/login.php';
 
-$action = $_GET['action'];
 
-switch ($action){
+switch($_GET['action']) {
+			case 'login':
+				echo '12';
+				$login = new system_login();
+				echo 'df';
+				$login->login($_GET['name'], $_GET['pasword']);
+				break;
+			
+			default:
+				print_r('hallo du arsch');
+				break;
+		}
 	
-	case 'LoginUser':
-		echo '12';
-		$user = new database_user();
-		echo 'df';
-		$user->LoginUser($_GET['name'],$_GET['pasword']);
-		break;
-		
-	default:
-		print_r('hallo du arsch');
-		break;
-}
