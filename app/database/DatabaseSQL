@@ -1,0 +1,135 @@
+-- --------------------------------------------------------
+-- Host:                         192.168.1.140
+-- Server Version:               5.5.62-0+deb8u1 - (Debian)
+-- Server Betriebssystem:        debian-linux-gnu
+-- HeidiSQL Version:             10.3.0.5771
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Exportiere Datenbank Struktur für Budgetrechner
+DROP DATABASE IF EXISTS `Budgetrechner`;
+CREATE DATABASE IF NOT EXISTS `Budgetrechner` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `Budgetrechner`;
+
+-- Exportiere Struktur von Tabelle Budgetrechner.budget_cycle
+DROP TABLE IF EXISTS `budget_cycle`;
+CREATE TABLE IF NOT EXISTS `budget_cycle` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) DEFAULT NULL,
+  `Cycle_Month` int(11) DEFAULT NULL,
+  `Cycle_Year` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Zyklus der Buchungen';
+
+-- Exportiere Daten aus Tabelle Budgetrechner.budget_cycle: ~-1 rows (ungefähr)
+DELETE FROM `budget_cycle`;
+/*!40000 ALTER TABLE `budget_cycle` DISABLE KEYS */;
+INSERT INTO `budget_cycle` (`ID`, `Name`, `Cycle_Month`, `Cycle_Year`) VALUES
+	(0, 'Einmalig', 0, 0),
+	(1, 'Jährlich', 12, 1),
+	(2, 'Monatlich', 1, 12),
+	(3, 'Alle 2 Monate', 2, 6),
+	(4, 'Quartalsweise', 3, 4),
+	(5, 'Halbjahrlich', 6, 2);
+/*!40000 ALTER TABLE `budget_cycle` ENABLE KEYS */;
+
+-- Exportiere Struktur von Tabelle Budgetrechner.budget_type
+DROP TABLE IF EXISTS `budget_type`;
+CREATE TABLE IF NOT EXISTS `budget_type` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) DEFAULT NULL,
+  `Description` varchar(50) DEFAULT NULL,
+  `Minus` int(11) DEFAULT '1' COMMENT 'Wen 1 dan sind es Ausgaben',
+  `budget_cycle_id` int(11) DEFAULT NULL COMMENT 'Zyklus der Einnahme/Ausgabe',
+  PRIMARY KEY (`ID`),
+  KEY `ID` (`ID`),
+  KEY `FK_cost_type_cost_cycle` (`budget_cycle_id`),
+  CONSTRAINT `FK_cost_type_cost_cycle` FOREIGN KEY (`budget_cycle_id`) REFERENCES `budget_cycle` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='Definiert den  Kosten-Typ';
+
+-- Exportiere Daten aus Tabelle Budgetrechner.budget_type: ~-1 rows (ungefähr)
+DELETE FROM `budget_type`;
+/*!40000 ALTER TABLE `budget_type` DISABLE KEYS */;
+INSERT INTO `budget_type` (`ID`, `Name`, `Description`, `Minus`, `budget_cycle_id`) VALUES
+	(0, 'Lohn', 'Lohnzahlungen', 0, 2),
+	(1, 'Benzien', 'Benzien aller art', 1, 2),
+	(2, 'Versicherung Alg', 'Versicherung Algemein', 1, 4),
+	(3, 'Versicherung Fz', 'Auto und Töff', 1, 4),
+	(4, 'Steuern Direckt', 'Direckte Bundessteuern', 1, 1),
+	(5, 'Steuern Indireckt', 'Indireckte Steuern', 1, 1),
+	(6, 'Essen', 'Essensgeld', 1, 2);
+/*!40000 ALTER TABLE `budget_type` ENABLE KEYS */;
+
+-- Exportiere Struktur von Tabelle Budgetrechner.budget_value
+DROP TABLE IF EXISTS `budget_value`;
+CREATE TABLE IF NOT EXISTS `budget_value` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `budget_typ_id` int(11) DEFAULT NULL,
+  `Value` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `cost_typ_id` (`budget_typ_id`),
+  CONSTRAINT `FK_cost_value_cost_type` FOREIGN KEY (`budget_typ_id`) REFERENCES `budget_type` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Die Kosten';
+
+-- Exportiere Daten aus Tabelle Budgetrechner.budget_value: ~-1 rows (ungefähr)
+DELETE FROM `budget_value`;
+/*!40000 ALTER TABLE `budget_value` DISABLE KEYS */;
+INSERT INTO `budget_value` (`ID`, `budget_typ_id`, `Value`) VALUES
+	(1, 0, 2000),
+	(2, 6, 200),
+	(3, 4, 3000);
+/*!40000 ALTER TABLE `budget_value` ENABLE KEYS */;
+
+-- Exportiere Struktur von Tabelle Budgetrechner.months
+DROP TABLE IF EXISTS `months`;
+CREATE TABLE IF NOT EXISTS `months` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Long` text COMMENT 'Monate',
+  `Short` text COMMENT 'Kürzel ',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Months in the Jear';
+
+-- Exportiere Daten aus Tabelle Budgetrechner.months: ~-1 rows (ungefähr)
+DELETE FROM `months`;
+/*!40000 ALTER TABLE `months` DISABLE KEYS */;
+INSERT INTO `months` (`ID`, `Long`, `Short`) VALUES
+	(1, 'Januar', 'Jan'),
+	(2, 'Februar', 'Feb'),
+	(3, 'März', 'Mär'),
+	(4, 'April', 'Apr'),
+	(5, 'Mai', 'Mai'),
+	(6, 'Juni', 'Jun'),
+	(7, 'Juli', 'Jul'),
+	(8, 'August', 'Aug'),
+	(9, 'September', 'Sep'),
+	(10, 'Oktober', 'Okt'),
+	(11, 'November', 'Nov'),
+	(12, 'Dezember', 'Dez');
+/*!40000 ALTER TABLE `months` ENABLE KEYS */;
+
+-- Exportiere Struktur von Tabelle Budgetrechner.user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LogIns` int(11) DEFAULT NULL COMMENT 'Tählt die anzahl Logins',
+  `Name` varchar(50) DEFAULT NULL,
+  `Pasword` varchar(50) DEFAULT NULL COMMENT 'MD5 Verschlüsselt',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='User Daten';
+
+-- Exportiere Daten aus Tabelle Budgetrechner.user: ~-1 rows (ungefähr)
+DELETE FROM `user`;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`ID`, `LogIns`, `Name`, `Pasword`) VALUES
+	(1, NULL, 'Simon', '202cb962ac59075b964b07152d234b70');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
