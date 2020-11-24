@@ -6,10 +6,12 @@ include_once '../class/Database.php';
  * User Tabelle und ihre funktionen
  */
 class database_user  {
+	
 	/**
 	 * @var class_database
 	 */
 		private $db;
+		
 		public function __construct() {
 			$this->db = new class_database();
 		}
