@@ -3,7 +3,7 @@
  * Class class_database
  * Verbindung zur Datenbank
  */
-class class_database {
+class config_database {
 	// User Daten
 	private $host = '192.168.1.140';
 	private $user = 'root';

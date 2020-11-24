@@ -2,9 +2,9 @@
 require_once '../database/user.php';
 
 /**
- * Class class_login
+ * Class system_user
  */
-class system_login {
+class system_user {
 	
 	/**
 	 * @var database_user

@@ -1,5 +1,5 @@
 <?php
-include_once '../class/Database.php';
+include_once '../config/Database.php';
 
 /**
  * Class database_user
@@ -8,12 +8,12 @@ include_once '../class/Database.php';
 class database_user {
 	
 	/**
-	 * @var class_database
+	 * @var config_database
 	 */
 	private $db;
 	
 	public function __construct() {
-		$this->db = new class_database();
+		$this->db = new config_database();
 	}
 	
 		public function LoginUser($name, $pasword) {
@@ -27,5 +27,4 @@ class database_user {
 				return false;
 			}
 		}
-	
 }
