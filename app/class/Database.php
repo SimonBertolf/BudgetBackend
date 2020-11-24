@@ -12,7 +12,7 @@ class class_database {
 	public $mysql;
 	
 	public function __construct() {
-		/// -------- Verbindungsaufbau --------
+		// -------- Verbindungsaufbau --------
 		$this->mysql = new mysqli($this->host, $this->user, $this->pw, $this->db);
 		
 		// -------- Fehleranalyse --------
