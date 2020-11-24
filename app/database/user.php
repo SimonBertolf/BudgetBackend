@@ -1,5 +1,5 @@
 <?php
-include_once '../config/database.php';
+include_once './app/config/database.php';
 
 /**
  * Class database_user

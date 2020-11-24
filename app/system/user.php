@@ -1,5 +1,5 @@
 <?php
-require_once '../database/user.php';
+require_once './app/database/user.php';
 
 /**
  * Class system_user
