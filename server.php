@@ -1,6 +1,6 @@
 <?php
 require_once('./app/system/user.php');
-
+header("Access-Control-Allow-Origin: http://localhost:6006");
 
 switch($_GET['action']) {
 	case 'login':
