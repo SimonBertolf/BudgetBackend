@@ -1,22 +1,10 @@
 <?php
-require_once('./app/system/user.php');
 header("Access-Control-Allow-Origin: http://localhost:6006");
+require_once './app/UserDAO/UserDAOImp.php';
+require_once './app/DatabaseService/MSQLIProxi.php';
+require_once './app/Request/RequestImp.php';
 
-switch($_GET['action']) {
-	case 'login':
-		$login = new system_user();
-		$t = $login->login($_GET['name'], $_GET['pasword']);
-		print_r ($t);
-		break;
-	
-	case 'signin':
-		$signin = new system_user();
-		$t = $signin->signin($_GET['name'], $_GET['pasword']);
-		print_r ($t);
-		break;
-	
-	default:
-		print_r('hallo du arsch');
-		break;
-}
-	
+$request = new RequestImp($_GET, $_POST);
+
+$databaseService = MSQLIProxi::getInstance();
+$userDAO = new UserDAOImp($databaseService);

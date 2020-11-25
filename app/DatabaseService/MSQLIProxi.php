@@ -2,6 +2,9 @@
 
 class MSQLIProxi implements DatabaseService {
 	
+	/**
+	 * @var MSQLIService
+	 */
 	private $databaseService;
 	protected static $instance;
 	
