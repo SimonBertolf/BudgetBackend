@@ -10,11 +10,13 @@ require_once './app/UserDAO/UserDAOImp.php';
 require_once './app/DatabaseService/MSQLIProxi.php';
 require_once './app/Request/RequestImp.php';
 require_once './app/Logger/Log.php';
+require_once './app/Controler/SigninControler.php';
 
 $request = new RequestImp($_GET, $_POST);
 
 $databaseService = MSQLIProxi::getInstance();
 $userDAO = new UserDAOImp($databaseService);
+
 
 
 

@@ -1,9 +1,9 @@
 <?php
 require_once './app/Controler/Controler.php';
 
-class LoginControler implements Controler {
+class SigninControler implements Controler {
 	
-	const ACTION = 'login';
+	const ACTION = 'signin';
 	
 	/**
 	 * @var Controler
@@ -28,11 +28,11 @@ class LoginControler implements Controler {
 	 */
 	public function handle($request) {
 		if($request->get('action') === $this::ACTION){
-			$user = $this->userDAO->findByName($request->get('name'));
+			$user = $this->userDAO->createUser($request['name'],$request['pasword']);
 			if($user){
-				if($user->getPasword() == $request->get('pasword')){
-					print_r($request);
-				}
+				print_r($request);
+			}else{
+				print_r($request);
 			}
 		}
 		if($this->nextControler) $this->nextControler->handle($request);
