@@ -1,4 +1,5 @@
 <?php
+require_once './app/Request/Request.php';
 
 class RequestImp implements Request {
 	

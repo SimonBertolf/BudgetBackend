@@ -1,4 +1,5 @@
 <?php
+require_once './app/DatabaseService/DatabaseService.php';
 
 class MSQLIService implements DatabaseService {
 	// User Daten

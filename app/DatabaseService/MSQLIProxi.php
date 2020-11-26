@@ -1,4 +1,6 @@
 <?php
+require_once './app/DatabaseService/DatabaseService.php';
+require_once './app/DatabaseService/MSQLIService.php';
 
 class MSQLIProxi implements DatabaseService {
 	

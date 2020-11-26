@@ -28,9 +28,7 @@ class LoginControler implements Controler {
 	public function handle($request) {
 		if($request->get('action') === $this::ACTION){
 			$user = $this->userDAO->findByName($request->get('name'));
-			
 			if($user){
-				print_r($user);
 				if($user->getPasword() == $request->get('pasword')){
 					print_r($request);
 				}

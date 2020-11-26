@@ -1,4 +1,5 @@
 <?php
+require_once './app/UserDAO/UserDAO.php';
 
 class UserDAOImp implements UserDAO {
 	

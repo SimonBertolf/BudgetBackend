@@ -1,4 +1,5 @@
 <?php
+require_once './app/User/User.php';
 
 class UserImp implements User {
 	
