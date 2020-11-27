@@ -1,7 +1,6 @@
 <?php
 
 interface User {
-	
 	public function getId();
 	public function getCounter();
 	public function getName();

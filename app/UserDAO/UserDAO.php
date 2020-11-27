@@ -17,14 +17,14 @@ interface UserDAO {
 	/**
 	 * @param $name
 	 * @param $pasword
-	 * @return User/false
+	 * @return boolean
 	 */
-	public function createUser($name, $pasword);
+	public function create($name, $pasword);
 	
 	/**
 	 * @param $id
 	 * @return boolean
 	 */
-	public function deleteUserById($id);
+	public function deleteById($id);
 	
 }

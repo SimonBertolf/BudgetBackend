@@ -43,35 +43,28 @@ class UserDAOImp implements UserDAO {
 	/**
 	 * @param $name
 	 * @param $pasword
-	 * @return UserImp|false
+	 * @return boolean
 	 */
-	public function createUser($name, $pasword){
+	public function create($name, $pasword){
 		$user = $this->findByName($name);
-		if($user){
-			return false;
-		}else {
-			$userNew = $this->databaseService->query("INSERT INTO user (Counter, Name, Pasword) VALUES (0,'" . $name . "','" . $pasword . "')")->fetch();
-			$userImp = new UserImp();
-			$userImp->setId($userNew[0]);
-			$userImp->setCounter($userNew[1]);
-			$userImp->setName($userNew[2]);
-			$userImp->setPasword($userNew[3]);
-			return $userImp;
+		if(!$user){
+			$this->databaseService->query("INSERT INTO user (Counter, Name, Pasword) VALUES (0,'" . $name . "','" . $pasword . "')")->fetch();
+			return true;
 		}
+		return false;
 	}
 	
 	
 	/**
 	 * @param $id
-	 * @return bool
+	 * @return boolean
 	 */
-	public function deleteUserById($id) {
+	public function deleteById($id) {
 		$user = $this->findById($id);
 		if($user){
 			$this->databaseService->query("DELETE FROM user WHERE id =".$id);
 			return true;
-		}else{
-			return false;
 		}
+		return false;
 	}
 }
