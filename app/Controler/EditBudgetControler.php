@@ -1,22 +1,25 @@
 <?php
 require_once './app/Controler/Controler.php';
 
-class SigninControler implements Controler {
+class EditBudgetControler implements Controler {
 	
-	const ACTION = 'signin';
+	const ACTION = 'editBudget';
+	
+	//Wird später über die Session Abgefangen
+	private $userid = 1;
 	
 	/**
 	 * @var Controler
 	 */
 	private $nextControler;
 	/**
-	 * @var UserDAO
+	 * @var BudgetDAO
 	 */
-	private $userDAO;
+	private $budgetDAO;
 	
-	public function __construct($userDAO) {
+	public function __construct($budgetDAO) {
 		$this->nextControler = null;
-		$this->userDAO = $userDAO;
+		$this->budgetDAO = $budgetDAO;
 	}
 	
 	public function setNext($controler) {
@@ -28,15 +31,10 @@ class SigninControler implements Controler {
 	 */
 	public function handle($request) {
 		if($request->get('action') === $this::ACTION){
-			$user = $this->userDAO->create($request['name'],$request['pasword']);
-			if($user){
-				print_r($request);
-			}else{
-				print_r($request);
-			}
+			if($this->budgetDAO->findById($request['id']))
+			$this->budgetDAO->edit($request['id'],$request['budgetTypeId'],$request['value']);
 		}
 		if($this->nextControler) $this->nextControler->handle($request);
 	}
-	
 	
 }
