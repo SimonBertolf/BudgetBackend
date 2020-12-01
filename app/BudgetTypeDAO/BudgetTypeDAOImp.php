@@ -13,7 +13,7 @@ class BudgetTypeDAOImp implements BudgetTypeDAO {
 	}
 	
 	public function findById($id) {
-		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE ID ='".$id."'")->fetch();
+		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE ID = '".$id."'")->fetch();
 		$budgetTypeImp = new BudgetTypeImp();
 		$budgetTypeImp->setId($budgetType[0]);
 		$budgetTypeImp->setName($budgetType[1]);
@@ -24,7 +24,7 @@ class BudgetTypeDAOImp implements BudgetTypeDAO {
 	}
 	
 	public function findByName($name) {
-		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE Name ='".$name."'")->fetch();
+		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE Name = '".$name."'")->fetch();
 		$budgetTypeImp = new BudgetTypeImp();
 		$budgetTypeImp->setId($budgetType[0]);
 		$budgetTypeImp->setName($budgetType[1]);
@@ -37,15 +37,23 @@ class BudgetTypeDAOImp implements BudgetTypeDAO {
 	public function deleteById($id) {
 		$budgetType = $this->findById($id);
 		if($budgetType){
-			$this->databaseService->query("DELETE FROM budget_type WHERE id ='".$id."'");
+			$this->databaseService->query("DELETE FROM budget_type WHERE ID ='".$id."'");
+			return true;
 		}
+		return false;
 	}
 	
 	public function create($name, $description, $minus, $cycleId) {
-		// TODO: Implement create() method.
+		$this->databaseService->query("INSERT INTO budget_type (Name, Description, Minus, budget_cycle_id) VALUES ('".$name."', '".$description."', '".$minus."', '".$cycleId."')");
+		return true;
 	}
 	
 	public function edit($id, $name, $description, $minus, $cycleId) {
-		// TODO: Implement edit() method.
+		$budgetType = $this->findById($id);
+		if($budgetType){
+			$this->databaseService->query("UPDATE budget_type SET Name = '".$name."', Description = '".$description."', Minus = '".$minus."', budget_cycle_id = '".$cycleId."'");
+			return true;
+		}
+		return false;
 	}
 }

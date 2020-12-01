@@ -33,7 +33,7 @@ class BudgetCycleDAOImp implements BudgetCycleDAO {
 	public function deleteById($id) {
 		$budgetCycle = $this->findById($id);
 		if($budgetCycle){
-			$this->databaseService->query("DELETE FROM budget_cycle WHERE id ='".$id."'");
+			$this->databaseService->query("DELETE FROM budget_cycle WHERE ID ='".$id."'");
 			return true;
 		}
 		return false;
