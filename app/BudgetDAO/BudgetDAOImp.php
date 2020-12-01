@@ -60,7 +60,7 @@ class BudgetDAOImp implements BudgetDAO {
 	public function edit($id, $budgetTypeId, $value) {
 		$budget = $this->findById($id);
 		if($budget){
-			$this->databaseService->query("UBDATE budget_value SET budget_type_id = '".$budgetTypeId."', Value ='".$value."' WHERE ID ='".$id."'")->fetch();
+			$this->databaseService->query("UPDATE budget_value SET budget_type_id = '".$budgetTypeId."', Value ='".$value."' WHERE ID ='".$id."'")->fetch();
 			return $budget;
 		}
 		return false;
