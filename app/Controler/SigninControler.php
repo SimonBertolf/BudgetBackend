@@ -30,9 +30,9 @@ class SigninControler implements Controler {
 		if($request->get('action') === $this::ACTION){
 			$user = $this->userDAO->create($request['name'],$request['pasword']);
 			if($user){
-				print_r($request);
+				Log::out('Ja');
 			}else{
-				print_r($request);
+				Log::out('nein');
 			}
 		}
 		if($this->nextControler) $this->nextControler->handle($request);

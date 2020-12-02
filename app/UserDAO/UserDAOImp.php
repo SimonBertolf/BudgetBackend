@@ -48,7 +48,7 @@ class UserDAOImp implements UserDAO {
 	public function create($name, $pasword){
 		$user = $this->findByName($name);
 		if(!$user){
-			$this->databaseService->query("INSERT INTO user (Counter, Name, Pasword) VALUES (0,'" . $name . "','" . $pasword . "')")->fetch();
+			$this->databaseService->query("INSERT INTO user (Counter, Name, Pasword) VALUES (0,'" . $name . "','" . $pasword . "')");
 			return true;
 		}
 		return false;
