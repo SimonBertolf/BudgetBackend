@@ -22,7 +22,6 @@ class TestControler implements Controler {
 	 * @param $request Request
 	 */
 	public function handle($request) {
-		Log::out('dgkjadsögadsögdaölkhöädalhklkd');
 		if($request->get('action') === $this::ACTION){
 				$data = array('arschloch'=>122);
 				echo json_encode($data);
