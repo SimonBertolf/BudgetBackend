@@ -1,7 +1,9 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:6006");
+//header("Access-Control-Allow-Origin: http://localhost:6006");
 //header("Access-Control-Allow-Origin: http://localhost:8080");
 //header("Access-Control-Allow-Origin: http://192.168.1.112:8080");
+header("Access-Control-Allow-Origin: http://192.168.1.104");
+header("Access-Control-Allow-Origin: http://192.168.1.140");
 
 //error_reporting(E_ALL | E_STRICT);
 //ini_set('display_errors', 1);

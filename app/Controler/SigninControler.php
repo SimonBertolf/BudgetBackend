@@ -28,7 +28,7 @@ class SigninControler implements Controler {
 	 */
 	public function handle($request) {
 		if($request->get('action') === $this::ACTION){
-			$user = $this->userDAO->create($request['name'],$request['pasword']);
+			$user = $this->userDAO->create($request->get('name'),$request->get('pasword'));
 			if($user){
 				Log::out('Ja');
 			}else{
