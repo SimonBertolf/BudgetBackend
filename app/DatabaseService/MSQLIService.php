@@ -12,6 +12,10 @@ class MSQLIService implements DatabaseService {
 	 * @var mysqli $mysql
 	 */
 	private $mysql;
+	
+	/**
+	 * @var MSQLIService $query
+	 */
 	private $query;
 	
 	public function __construct() {
@@ -24,7 +28,12 @@ class MSQLIService implements DatabaseService {
 	
 	public function query($query) {
 		$this->query = $this->mysql->query($query);
-		return $this;
+		return $this->query;
+	}
+	
+	 public function queryFetchAll($query) {
+		$this->query = $this->mysql->query($query)->fetch_all();
+		return $this->query;
 	}
 	
 	public function fetch() {

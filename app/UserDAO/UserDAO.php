@@ -4,13 +4,13 @@ interface UserDAO {
 	
 	/**
 	 * @param $name
-	 * @return User
+	 * @return User|false
 	 */
 	public function findByName($name);
 	
 	/**
 	 * @param $id
-	 * @return User
+	 * @return User|false
 	 */
 	public function findById($id);
 	

@@ -27,21 +27,28 @@ class LoginControler implements Controler {
 	 * @param $request Request
 	 */
 	public function handle($request) {
-		if($request->get('action') === $this::ACTION){
+		if($request->get('action') === $this::ACTION) {
 			$user = $this->userDAO->findByName($request->get('name'));
-			if($user){
-				if($user->getPasword() == $request->get('pasword')){
-					return json_encode(array('pasword' => true, 'user' => true));
+			if($user) {
+				if($user->getPasword() == $request->get('pasword')) {
+					echo json_encode(array(
+						'user'    => true,
+						'pasword' => true,
+					));
+				} else {
+					echo json_encode(array(
+						'user'    => true,
+						'pasword' => false,
+					));
 				}
-				else{
-					return json_encode(array('pasword' => false));
-				}
-			}else{
-				return json_encode(array('user' => false));
+			} else {
+				echo json_encode(array(
+					'user'    => false,
+					'pasword' => false,
+				));
 			}
 		}
 		if($this->nextControler) $this->nextControler->handle($request);
 	}
-	
 	
 }

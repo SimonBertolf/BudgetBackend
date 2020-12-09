@@ -23,7 +23,12 @@ class MSQLIProxi implements DatabaseService {
 	
 	public function query($query) {
 		$this->databaseService->query($query);
-		return $this;
+		return $this->databaseService;
+	}
+	
+	public function queryFetchAll($query) {
+		$this->databaseService->queryFetchAll($query);
+		return $this->databaseService;
 	}
 	
 	public function fetch() {
