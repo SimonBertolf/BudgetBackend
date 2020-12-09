@@ -41,10 +41,10 @@ class UserDAOImp implements UserDAO {
 		$this->databaseService->query("SELECT * FROM user WHERE ID ='" . $id . "'");
 		$user = $this->databaseService->fetch();
 		if($user) {
-			$userImp->setId($user[0]);
-			$userImp->setCounter($user[1]);
-			$userImp->setName($user[2]);
-			$userImp->setPasword($user[3]);
+			$userImp->setId($user[0][0]);
+			$userImp->setCounter($user[0][1]);
+			$userImp->setName($user[0][2]);
+			$userImp->setPasword($user[0][3]);
 			return $userImp;
 		}
 		return false;
@@ -73,6 +73,20 @@ class UserDAOImp implements UserDAO {
 		$user = $this->findById($id);
 		if($user){
 			$this->databaseService->query("DELETE FROM user WHERE id =".$id);
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * @param $id
+	 * @return bool
+	 */
+	public function updateCounterById($id) {
+		$user = $this->findById($id);
+		if($user){
+			$counter = $user->getCounter();
+			$this->databaseService->query("UPDATE user SET Counter = ".($counter+=1)." WHERE ID = ".$id);
 			return true;
 		}
 		return false;

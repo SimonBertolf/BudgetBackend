@@ -27,4 +27,10 @@ interface UserDAO {
 	 */
 	public function deleteById($id);
 	
+	/**
+	 * @param $id
+	 * @return boolean
+	 */
+	public function updateCounterById($id);
+	
 }

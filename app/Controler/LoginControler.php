@@ -31,13 +31,14 @@ class LoginControler implements Controler {
 			$user = $this->userDAO->findByName($request->get('name'));
 			if($user) {
 				if($user->getPasword() == $request->get('pasword')) {
+					$this->userDAO->updateCounterById($user->getId());
 					echo json_encode(array(
-						'user'    => true,
-						'pasword' => true,
+						'user'    => $request->get('name'),
+						'pasword' => $request->get('pasword'),
 					));
 				} else {
 					echo json_encode(array(
-						'user'    => true,
+						'user'    => $request->get('name'),
 						'pasword' => false,
 					));
 				}

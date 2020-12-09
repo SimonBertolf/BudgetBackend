@@ -8,7 +8,7 @@ abstract class Log {
 	public static function out($data) {
 		$fp = fopen('debug.log', 'w');
 		$fi = fread($fp, 1000);
-		$res = 'Log ';
+		$res = '';
 		if (is_array($data)){
 			$res .= implode('=>',$data);
 		}else{
