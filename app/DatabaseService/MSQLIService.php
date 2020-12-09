@@ -31,11 +31,6 @@ class MSQLIService implements DatabaseService {
 		return $this->query;
 	}
 	
-	 public function queryFetchAll($query) {
-		$this->query = $this->mysql->query($query)->fetch_all();
-		return $this->query;
-	}
-	
 	public function fetch() {
 		return $this->query->fetch_all();
 	}
