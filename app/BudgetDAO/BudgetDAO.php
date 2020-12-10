@@ -26,9 +26,10 @@ interface BudgetDAO {
 	 * @param $id
 	 * @param $budgetTypeId
 	 * @param $value
+	 * @param $budgetCycleId
 	 * @return Budget|false
 	 */
-	public function edit($id, $budgetTypeId, $value);
+	public function edit($id, $budgetTypeId, $value, $budgetCycleId);
 	
 	/**
 	 * @param $userId

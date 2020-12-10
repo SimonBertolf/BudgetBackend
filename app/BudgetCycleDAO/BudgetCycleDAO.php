@@ -9,6 +9,12 @@ interface BudgetCycleDAO {
 	public function findById($id);
 	
 	/**
+	 * @param $name
+	 * @return BudgetCycle
+	 */
+	public function findByName($name);
+	
+	/**
 	 * @param $id
 	 * @return boolean
 	 */

@@ -57,12 +57,13 @@ class BudgetDAOImp implements BudgetDAO {
 	 * @param $id
 	 * @param $budgetTypeId
 	 * @param $value
+	 * @param $budgetCycleId
 	 * @return BudgetImp|false
 	 */
-	public function edit($id, $budgetTypeId, $value) {
+	public function edit($id, $budgetTypeId, $value, $budgetCycleId) {
 		$budget = $this->findById($id);
 		if($budget){
-			$this->databaseService->query("UPDATE budget_value SET budget_type_id = '".$budgetTypeId."', Value ='".$value."' WHERE ID ='".$id."'");
+			$this->databaseService->query("UPDATE budget_value SET budget_type_id = '".$budgetTypeId."', Value ='".$value."', budget_cycle_id ='".$budgetCycleId."' WHERE ID ='".$id."'");
 			return $budget;
 		}
 		return false;

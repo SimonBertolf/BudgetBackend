@@ -1,9 +1,9 @@
 <?php
 require_once './app/Controler/Controler.php';
 
-class FindeEditBudgetControler implements Controler {
+class EditBudgetControler implements Controler {
 	
-	const ACTION = 'findeEditBudget';
+	const ACTION = 'editBudget';
 	
 	//Wird später über die Session Abgefangen
 	private $userid = 1;
@@ -28,7 +28,6 @@ class FindeEditBudgetControler implements Controler {
 	 */
 	private $budgetTypeDAO;
 	
-	public $userId = 1;
 	
 	
 	public function __construct($budgetDAO, $budgetCycleDAO, $budgetTypeDAO) {
@@ -47,15 +46,16 @@ class FindeEditBudgetControler implements Controler {
 	 */
 	public function handle($request) {
 		if($request->get('action') === $this::ACTION){
-			$data = array();
 			if($this->budgetDAO->findById($request->get('id'))){
 				$budget = $this->budgetDAO->findById($request->get('id'));
-				$type = $this->budgetTypeDAO->findById($budget->getBudgetTypeId());
-				$cycle = $this->budgetCycleDAO->findById($budget->getBudgetCycleId());
-				$data['type'] = $type->getName();
-				$data['value'] = $budget->getValue();
-				$data['cycle'] = $cycle->getName();
-				echo json_encode($data);
+				$value = $budget->setValue($request->get('value'));
+				$type = $budget->setBudgetType($request->get('type'));
+				$cycle = $budget->setBudgetCycle($request->get('cycle'));
+				$type = $this->budgetTypeDAO->findByName($type);
+				$cycle = $this->budgetCycleDAO->findByName($cycle);
+				$type_id = $type->getId();
+				$cycle_id = $cycle->getId();
+				$this->budgetDAO->edit($request->get('id'), $type_id, $value, $cycle_id);
 			}
 		}
 		if($this->nextControler) $this->nextControler->handle($request);
