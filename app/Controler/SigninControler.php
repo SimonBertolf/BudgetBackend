@@ -27,16 +27,14 @@ class SigninControler implements Controler {
 	 * @param $request Request
 	 */
 	public function handle($request) {
-		if($request->get('action') === $this::ACTION){
-			$user = $this->userDAO->create($request->get('name'),$request->get('pasword'));
-			if($user){
-				Log::out('Ja');
-			}else{
-				Log::out('nein');
+		if($request->get('action') === $this::ACTION) {
+			$user = $this->userDAO->create($request->get('name'), $request->get('pasword'));
+			if($user) {
+				echo json_encode(array('create' => true));
+			} else {
+				echo json_encode(array('create' => false));
 			}
 		}
 		if($this->nextControler) $this->nextControler->handle($request);
 	}
-	
-	
 }

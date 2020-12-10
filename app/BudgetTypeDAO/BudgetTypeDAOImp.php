@@ -1,5 +1,6 @@
 <?php
 require_once './app/BudgetTypeDAO/BudgetTypeDAO.php';
+require_once './app/BudgetType/BudgetTypeImp.php';
 
 class BudgetTypeDAOImp implements BudgetTypeDAO {
 	
@@ -13,18 +14,19 @@ class BudgetTypeDAOImp implements BudgetTypeDAO {
 	}
 	
 	public function findById($id) {
-		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE ID = '".$id."'")->fetch();
+		$this->databaseService->query("SELECT * FROM budget_type WHERE ID = '".$id."'");
+		$budgetType = $this->databaseService->fetch();
 		$budgetTypeImp = new BudgetTypeImp();
-		$budgetTypeImp->setId($budgetType[0]);
-		$budgetTypeImp->setName($budgetType[1]);
-		$budgetTypeImp->setDescription($budgetType[2]);
-		$budgetTypeImp->setMinus($budgetType[3]);
-		$budgetTypeImp->setCycleId($budgetType[4]);
+		$budgetTypeImp->setId($budgetType[0][0]);
+		$budgetTypeImp->setName($budgetType[0][1]);
+		$budgetTypeImp->setDescription($budgetType[0][2]);
+		$budgetTypeImp->setMinus($budgetType[0][3]);
+		$budgetTypeImp->setCycleId($budgetType[0][4]);
 		return $budgetTypeImp;
 	}
 	
 	public function findByName($name) {
-		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE Name = '".$name."'")->fetch();
+		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE Name = '".$name."'");
 		$budgetTypeImp = new BudgetTypeImp();
 		$budgetTypeImp->setId($budgetType[0]);
 		$budgetTypeImp->setName($budgetType[1]);

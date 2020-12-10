@@ -1,5 +1,6 @@
 <?php
 require_once './app/BudgetCycleDAO/BudgetCycleDAO.php';
+require_once './app/BudgetCycle/BudgetCycleImp.php';
 
 class BudgetCycleDAOImp implements BudgetCycleDAO {
 	
@@ -17,7 +18,7 @@ class BudgetCycleDAOImp implements BudgetCycleDAO {
 	 * @return BudgetCycleImp
 	 */
 	public function findById($id) {
-		$budgetCycle = $this->databaseService->query("SELECT * FROM budget_cycle WHERE ID ='".$id."'")->fetch();
+		$budgetCycle = $this->databaseService->query("SELECT * FROM budget_cycle WHERE ID ='".$id."'");
 		$budgetCycleImp = new BudgetCycleImp();
 		$budgetCycleImp->setId($budgetCycle[0]);
 		$budgetCycleImp->setName($budgetCycle[1]);

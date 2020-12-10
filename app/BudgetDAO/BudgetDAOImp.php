@@ -1,5 +1,6 @@
 <?php
 require_once './app/BudgetDAO/BudgetDAO.php';
+require_once './app/Budget/BudgetImp.php';
 
 class BudgetDAOImp implements BudgetDAO {
 	
@@ -17,13 +18,13 @@ class BudgetDAOImp implements BudgetDAO {
 	 * @return BudgetImp
 	 */
 	public function findById($id) {
-//		$budget = $this->databaseService->query("SELECT * FROM budget_value LEFT JOIN budget_type ON budget_type.ID = budget_value.budget_type_id LEFT JOIN budget_cycle ON budget_cycle.ID = budget_type.budget_cycle_id WHERE budget_value.ID ='".$id."'")->fetch();
-		$budget = $this->databaseService->query("SELECT * FROM budget_value WHERE ID ='".$id."'")->fetch();
+		$this->databaseService->query("SELECT * FROM budget_value WHERE ID ='".$id."'");
+		$budget = $this->databaseService->fetch();
 		$budgetImp = new BudgetImp();
-		$budgetImp->setId($budget[0]);
-		$budgetImp->setBudgetTypeId($budget[1]);
-		$budgetImp->setValue($budget[2]);
-		$budgetImp->setUserId($budget[3]);
+		$budgetImp->setId($budget[0][0]);
+		$budgetImp->setBudgetTypeId($budget[0][1]);
+		$budgetImp->setValue($budget[0][2]);
+		$budgetImp->setUserId($budget[0][3]);
 		return $budgetImp;
 	}
 	
@@ -47,7 +48,7 @@ class BudgetDAOImp implements BudgetDAO {
 	 * @return boolean
 	 */
 	public function create($budgetTypeId, $value, $userId) {
-		$this->databaseService->query("INSERT INTO (Budget_value, Value, user_id) VALUES ('".$budgetTypeId."', '".$value."', '".$userId."')")->fetch();
+		$this->databaseService->query("INSERT INTO (Budget_value, Value, user_id) VALUES ('".$budgetTypeId."', '".$value."', '".$userId."')");
 		return true;
 	}
 	
@@ -60,7 +61,7 @@ class BudgetDAOImp implements BudgetDAO {
 	public function edit($id, $budgetTypeId, $value) {
 		$budget = $this->findById($id);
 		if($budget){
-			$this->databaseService->query("UPDATE budget_value SET budget_type_id = '".$budgetTypeId."', Value ='".$value."' WHERE ID ='".$id."'")->fetch();
+			$this->databaseService->query("UPDATE budget_value SET budget_type_id = '".$budgetTypeId."', Value ='".$value."' WHERE ID ='".$id."'");
 			return $budget;
 		}
 		return false;
@@ -68,32 +69,35 @@ class BudgetDAOImp implements BudgetDAO {
 	
 	/**
 	 * @param $userId
-	 * @return BudgetImp
+	 * @return array
 	 */
 	public function findAll($userId) {
-		$budgets = $this->databaseService->query("SELECT * FROM budget_value WHERE user_id ='".$useId."'")->fetch();
+		$this->databaseService->query("SELECT ID, budget_type_id, Value, user_id FROM budget_value WHERE user_id ='".$userId."'");
+		$budgets = $this->databaseService->fetch();
+		$res = array();
 		foreach($budgets as $budget){
-			$budgetImp = new BudgetImp();
-			$budgetImp->setId($budget[0]);
-			$budgetImp->setBudgetTypeId($budget[1]);
-			$budgetImp->setValue($budget[2]);
-			$budgetImp->setUserId($budget[3]);
+			$res[$budget[0]]['ID'] = $budget[0];
+			$res[$budget[0]]['budget_type_id'] = $budget[1];
+			$res[$budget[0]]['Value'] = $budget[2];
+			$res[$budget[0]]['user_id'] = $budget[3];
 		}
-		return $budgetImp;
+		return $res;
 	}
 	
 	/**
+	 * @param $userId
 	 * @param $budgetTypeId
 	 * @return BudgetImp
 	 */
 	public function findByBudgetTypeId($userId, $budgetTypeId) {
-		$budgets = $this->databaseService->query("SELECT * FROM budget_value WHERE user_id ='".$useId."'AND budget_type_id ='".$budgetTypeId."'")->fetch();
+		$this->databaseService->query("SELECT * FROM budget_value WHERE user_id ='".$userId."'AND budget_type_id ='".$budgetTypeId."'");
+		$budgets = $this->databaseService->fetch();
 		foreach($budgets as $budget){
 			$budgetImp = new BudgetImp();
-			$budgetImp->setId($budget[0]);
-			$budgetImp->setBudgetTypeId($budget[1]);
-			$budgetImp->setValue($budget[2]);
-			$budgetImp->setUserId($budget[3]);
+			$budgetImp->setId($budget[][0]);
+			$budgetImp->setBudgetTypeId($budget[0][1]);
+			$budgetImp->setValue($budget[0][2]);
+			$budgetImp->setUserId($budget[0][3]);
 		}
 		return $budgetImp;
 	}

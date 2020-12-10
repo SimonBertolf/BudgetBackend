@@ -10,7 +10,17 @@ abstract class Log {
 		$fi = fread($fp, 1000);
 		$res = '';
 		if (is_array($data)){
-			$res .= implode('=>',$data);
+			foreach($data as $k => $d){
+				if(is_array($d)){
+					$res.='{';
+					foreach($d as $ki => $di){
+						$res .= '|'.$ki.'=>'.$di;
+					}
+					$res.='}'.PHP_EOL ;
+				}else{
+					$res .= '|'.$k.'=>'.$d.PHP_EOL;
+				}
+			}
 		}else{
 			$res .= $data;
 		}
