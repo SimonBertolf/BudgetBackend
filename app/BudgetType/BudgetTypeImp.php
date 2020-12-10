@@ -7,7 +7,6 @@ class BudgetTypeImp implements BudgetType {
 	private $name;
 	private $description;
 	private $minus;
-	private $cycleId;
 	
 	public function getId() {
 	return $this->id;
@@ -25,10 +24,6 @@ class BudgetTypeImp implements BudgetType {
 	return $this->minus;
 	}
 	
-	public function getCycleId() {
-	return $this->cycleId;
-	}
-	
 	
 	public function setId($id) {
 		$this->id = $id;
@@ -44,9 +39,5 @@ class BudgetTypeImp implements BudgetType {
 	
 	public function setMinus($minus) {
 	$this->minus = $minus;
-	}
-	
-	public function setCycleId($cycleId) {
-	$this->cycleId = $cycleId;
 	}
 }

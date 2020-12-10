@@ -19,6 +19,7 @@ require_once './app/BudgetTypeDAO/BudgetTypeDAOImp.php';
 require_once './app/Controler/LoginControler.php';
 require_once './app/Controler/SigninControler.php';
 require_once './app/Controler/ShowBudgetControler.php';
+require_once './app/Controler/FindeEditBudgetControler.php';
 
 $request = new RequestImp($_GET, $_POST);
 $databaseService = MSQLIProxi::getInstance();
@@ -35,3 +36,6 @@ $signin->handle($request);
 
 $showBudget = new ShowBudgetControler($budgetDAO, $budgetCycleDAO, $budgetTypeDAO);
 $showBudget->handle($request);
+
+$findeEditBudget = new FindeEditBudgetControler($budgetDAO, $budgetCycleDAO, $budgetTypeDAO);
+$findeEditBudget->handle($request);

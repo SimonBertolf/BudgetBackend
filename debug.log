@@ -1,6 +1,0 @@
- {|ID=>1|budget_type_id=>7|Value=>2000|user_id=>1|budget_type=>Lohn}
-{|ID=>2|budget_type_id=>6|Value=>200|user_id=>1|budget_type=>Essen}
-{|ID=>3|budget_type_id=>4|Value=>3000|user_id=>1|budget_type=>Steuern Direckt}
-{|ID=>4|budget_type_id=>7|Value=>200|user_id=>1|budget_type=>Lohn}
-{|ID=>5|budget_type_id=>7|Value=>200|user_id=>1|budget_type=>Lohn}
-{|ID=>6|budget_type_id=>7|Value=>200|user_id=>1|budget_type=>Lohn}

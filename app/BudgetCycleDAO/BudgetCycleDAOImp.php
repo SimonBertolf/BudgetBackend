@@ -18,12 +18,13 @@ class BudgetCycleDAOImp implements BudgetCycleDAO {
 	 * @return BudgetCycleImp
 	 */
 	public function findById($id) {
-		$budgetCycle = $this->databaseService->query("SELECT * FROM budget_cycle WHERE ID ='".$id."'");
+		$this->databaseService->query("SELECT * FROM budget_cycle WHERE ID ='".$id."'");
+		$budgetCycle = $this->databaseService->fetch();
 		$budgetCycleImp = new BudgetCycleImp();
-		$budgetCycleImp->setId($budgetCycle[0]);
-		$budgetCycleImp->setName($budgetCycle[1]);
-		$budgetCycleImp->setCycleMonth($budgetCycle[2]);
-		$budgetCycleImp->setCycleYear($budgetCycle[3]);
+		$budgetCycleImp->setId($budgetCycle[0][0]);
+		$budgetCycleImp->setName($budgetCycle[0][1]);
+		$budgetCycleImp->setCycleMonth($budgetCycle[0][2]);
+		$budgetCycleImp->setCycleYear($budgetCycle[0][3]);
 		return $budgetCycleImp;
 	}
 	

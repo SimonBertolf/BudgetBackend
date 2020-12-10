@@ -5,6 +5,7 @@ class BudgetImp implements Budget {
 	
 	private $id;
 	private $budgetTypeId;
+	private $budgetCycleId;
 	private $value;
 	private $userId;
 	private $budgetType;
@@ -16,6 +17,10 @@ class BudgetImp implements Budget {
 	
 	public function getBudgetTypeId() {
 		return $this->budgetTypeId;
+	}
+	
+	public function getBudgetCycleId() {
+		return $this->budgetCycleId;
 	}
 	
 	public function getValue() {
@@ -42,6 +47,10 @@ class BudgetImp implements Budget {
 	
 	public function setBudgetTypeId($budgetTypeId) {
 		$this->budgetTypeId = $budgetTypeId;
+	}
+	
+	public function setBudgetCycleId($budgetCycleId) {
+		$this->budgetCycleId = $budgetCycleId;
 	}
 	
 	public function setValue($value) {
