@@ -52,7 +52,7 @@ class FindeEditBudgetControler implements Controler {
 				$budget = $this->budgetDAO->findById($request->get('id'));
 				$type = $this->budgetTypeDAO->findById($budget->getBudgetTypeId());
 				$cycle = $this->budgetCycleDAO->findById($budget->getBudgetCycleId());
-				
+				Log::out($budget->getBudgetCycleId());
 				$data['type'] = $type->getName();
 				$data['value'] = $budget->getValue();
 				$data['cycle'] = $cycle->getName();
