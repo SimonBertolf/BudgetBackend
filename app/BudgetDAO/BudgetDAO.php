@@ -18,9 +18,10 @@ interface BudgetDAO {
 	 * @param $budgetTypeId
 	 * @param $value
 	 * @param $userId
+	 * @param $budgetCycleId
 	 * @return boolean
 	 */
-	public function create($budgetTypeId, $value, $userId);
+	public function create($budgetTypeId, $value, $userId, $budgetCycleId);
 	
 	/**
 	 * @param $id
