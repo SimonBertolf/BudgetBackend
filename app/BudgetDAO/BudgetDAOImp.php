@@ -50,7 +50,7 @@ class BudgetDAOImp implements BudgetDAO {
 	 * @return boolean
 	 */
 	public function create($budgetTypeId, $value, $userId, $budgetCycleId) {
-		$this->databaseService->query("INSERT INTO Budget_value (budget_type_id, Value, user_id, budget_cycle_id) VALUES ('".$budgetTypeId."', '".$value."', '".$userId."', '".$budgetCycleId."')");
+		$this->databaseService->query("INSERT INTO budget_value (budget_type_id, Value, user_id, budget_cycle_id) VALUES ('".$budgetTypeId."', '".$value."', '".$userId."', '".$budgetCycleId."')");
 		return true;
 	}
 	

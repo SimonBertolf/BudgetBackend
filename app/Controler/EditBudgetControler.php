@@ -48,14 +48,14 @@ class EditBudgetControler implements Controler {
 		if($request->get('action') === $this::ACTION){
 			if($this->budgetDAO->findById($request->get('id'))){
 				$budget = $this->budgetDAO->findById($request->get('id'));
-				$value = $budget->setValue($request->get('value'));
-				$type = $budget->setBudgetType($request->get('type'));
-				$cycle = $budget->setBudgetCycle($request->get('cycle'));
-				$type = $this->budgetTypeDAO->findByName($type);
-				$cycle = $this->budgetCycleDAO->findByName($cycle);
+				$budget->setValue($request->get('value'));
+				$budget->setBudgetType($request->get('type'));
+				$budget->setBudgetCycle($request->get('cycle'));
+				$type = $this->budgetTypeDAO->findByName($budget->getBudgetType());
+				$cycle = $this->budgetCycleDAO->findByName($budget->getBudgetCycle());
 				$type_id = $type->getId();
 				$cycle_id = $cycle->getId();
-				$this->budgetDAO->edit($request->get('id'), $type_id, $value, $cycle_id);
+				$this->budgetDAO->edit($request->get('id'), $type_id, $budget->getValue(), $cycle_id);
 			}
 		}
 		if($this->nextControler) $this->nextControler->handle($request);

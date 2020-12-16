@@ -25,12 +25,13 @@ class BudgetTypeDAOImp implements BudgetTypeDAO {
 	}
 	
 	public function findByName($name) {
-		$budgetType = $this->databaseService->query("SELECT * FROM budget_type WHERE Name = '".$name."'");
+		$this->databaseService->query("SELECT * FROM budget_type WHERE Name = '".$name."'");
+		$budgetType = $this->databaseService->fetch();
 		$budgetTypeImp = new BudgetTypeImp();
-		$budgetTypeImp->setId($budgetType[0]);
-		$budgetTypeImp->setName($budgetType[1]);
-		$budgetTypeImp->setDescription($budgetType[2]);
-		$budgetTypeImp->setMinus($budgetType[3]);
+		$budgetTypeImp->setId($budgetType[0][0]);
+		$budgetTypeImp->setName($budgetType[0][1]);
+		$budgetTypeImp->setDescription($budgetType[0][2]);
+		$budgetTypeImp->setMinus($budgetType[0][3]);
 		return $budgetTypeImp;
 	}
 	

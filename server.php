@@ -21,6 +21,8 @@ require_once './app/Controler/SigninControler.php';
 require_once './app/Controler/ShowBudgetControler.php';
 require_once './app/Controler/FindeEditBudgetControler.php';
 require_once './app/Controler/DeleteBudgetControler.php';
+require_once './app/Controler/AddNewBudgetControler.php';
+require_once './app/Controler/EditBudgetControler.php';
 
 $request = new RequestImp($_GET, $_POST);
 $databaseService = MSQLIProxi::getInstance();
@@ -43,3 +45,9 @@ $findeEditBudget->handle($request);
 
 $deleteBudget = new DeleteBudgetControler($budgetDAO);
 $deleteBudget->handle($request);
+
+$addNewBudget = new AddNewBudgetControler($budgetDAO, $budgetCycleDAO, $budgetTypeDAO);
+$addNewBudget->handle($request);
+
+$editBudget = new EditBudgetControler($budgetDAO, $budgetCycleDAO, $budgetTypeDAO);
+$editBudget->handle($request);
