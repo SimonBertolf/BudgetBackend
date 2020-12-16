@@ -31,7 +31,6 @@ class BudgetTypeDAOImp implements BudgetTypeDAO {
 		$budgetTypeImp->setName($budgetType[1]);
 		$budgetTypeImp->setDescription($budgetType[2]);
 		$budgetTypeImp->setMinus($budgetType[3]);
-		$budgetTypeImp->setCycleId($budgetType[4]);
 		return $budgetTypeImp;
 	}
 	

@@ -46,8 +46,11 @@ class ShowBudgetControler implements Controler {
 		if($request->get('action') === $this::ACTION){
 			$budget = $this->budgetDAO->findAll($this->userId);
 			foreach($budget as $ke => $bu){
+				Log::out($bu);
 				$type = $this->budgetTypeDAO->findById($bu['budget_type_id']);
 				$budget[$ke]['budget_type'] = $type->getName();
+				$cycle = $this->budgetCycleDAO->findById($bu['budget_cycle_id']);
+				$budget[$ke]['budget_cycle'] = $cycle->getName();
 			}
 			echo json_encode($budget);
 		}

@@ -74,7 +74,7 @@ class BudgetDAOImp implements BudgetDAO {
 	 * @return array
 	 */
 	public function findAll($userId) {
-		$this->databaseService->query("SELECT ID, budget_type_id, Value, user_id FROM budget_value WHERE user_id ='".$userId."'");
+		$this->databaseService->query("SELECT ID, budget_type_id, Value, user_id, budget_cycle_id FROM budget_value WHERE user_id ='".$userId."'");
 		$budgets = $this->databaseService->fetch();
 		$res = array();
 		foreach($budgets as $budget){
@@ -82,6 +82,7 @@ class BudgetDAOImp implements BudgetDAO {
 			$res[$budget[0]]['budget_type_id'] = $budget[1];
 			$res[$budget[0]]['Value'] = $budget[2];
 			$res[$budget[0]]['user_id'] = $budget[3];
+			$res[$budget[0]]['budget_cycle_id'] = $budget[4];
 		}
 		return $res;
 	}

@@ -29,7 +29,7 @@ class BudgetCycleDAOImp implements BudgetCycleDAO {
 	}
 	
 	/**
-	 * @param $id
+	 * @param $name
 	 * @return BudgetCycleImp
 	 */
 	public function findByName($name) {
@@ -45,7 +45,7 @@ class BudgetCycleDAOImp implements BudgetCycleDAO {
 	
 	/**
 	 * @param $id
-	 * @return bool
+	 * @return boolean
 	 */
 	public function deleteById($id) {
 		$budgetCycle = $this->findById($id);
